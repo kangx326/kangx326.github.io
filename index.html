@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xin Kang · Homepage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f7fb; --card:#ffffff; --ink:#1a1f2b; --body:#414a5c;
+    --muted:#6b7488; --soft:#98a0b3; --line:#e9ebf2; --line2:#f0f2f7;
+    --accent:#2f6bff; --accent-ink:#1e4fd0; --accent-soft:#edf2ff; --chip:#f1f3f9;
+    --grad1:#3f7bff; --grad2:#7c5cff; --shadow:0 6px 20px rgba(28,40,80,.06);
+    --shadow-lg:0 16px 44px rgba(28,40,80,.12);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--body);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.68; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  a{color:var(--accent); text-decoration:none; transition:color .15s}
+  a:hover{color:var(--accent-ink)}
+
+  /* decorative top band */
+  .band{
+    position:absolute; inset:0 0 auto 0; height:340px; z-index:0;
+    background:
+      radial-gradient(900px 340px at 78% -40%, rgba(124,92,255,.16), transparent 60%),
+      radial-gradient(760px 320px at 12% -30%, rgba(63,123,255,.18), transparent 60%),
+      linear-gradient(180deg,#eef2fe, var(--bg));
+  }
+  .wrap{position:relative; z-index:1; max-width:1000px; margin:0 auto; padding:60px 32px 90px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    display:flex; gap:32px; align-items:center; flex-wrap:wrap;
+    background:var(--card); border:1px solid var(--line);
+    border-radius:22px; padding:30px 32px; box-shadow:var(--shadow-lg);
+  }
+  .photo-ring{flex:0 0 auto}
+  .photo{ width:158px; height:158px; border-radius:20px; object-fit:cover; display:block;
+    box-shadow:0 10px 26px rgba(28,40,80,.16); }
+  .intro{flex:1; min-width:250px}
+  .intro h1{
+    margin:0; font-family:"Newsreader",serif; font-weight:600; font-size:38px;
+    letter-spacing:-.01em; color:var(--ink); line-height:1.1;
+  }
+  .intro h1 .zh{font-size:24px; color:var(--muted); font-weight:400; margin-left:10px}
+  .role{color:var(--ink); font-size:16px; font-weight:600; margin-top:10px}
+  .role.sub{color:var(--muted); font-weight:500; font-size:14.5px; margin-top:3px}
+  .contact{
+    display:inline-flex; align-items:center; gap:7px; margin-top:16px; font-size:14px;
+    color:var(--accent-ink); background:var(--accent-soft); border:1px solid #d8e3ff;
+    padding:7px 14px; border-radius:9px; font-weight:500;
+  }
+  .contact:hover{background:#e3ecff}
+
+  /* ---------- SECTIONS ---------- */
+  section{margin-top:46px}
+  .h2{
+    display:flex; align-items:center; gap:12px; margin:0 0 20px;
+    font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--accent);
+  }
+  .h2::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent)}
+  .h2 .dot{width:7px; height:7px; border-radius:50%; background:linear-gradient(135deg,var(--grad1),var(--grad2))}
+
+  /* about card */
+  .about{
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:24px 28px; box-shadow:var(--shadow);
+  }
+  .about p{margin:0; font-size:16px; color:var(--body)}
+  .about p + p{margin-top:14px}
+  .about b{color:var(--ink); font-weight:600}
+  .interests{display:flex; flex-wrap:wrap; gap:9px; margin-top:20px}
+  .chip{
+    font-size:13px; font-weight:500; color:var(--accent-ink);
+    background:var(--accent-soft); border:1px solid #dbe5ff;
+    padding:6px 13px; border-radius:999px;
+  }
+
+  /* ---------- PUBLICATIONS ---------- */
+  .pub{
+    display:flex; gap:20px; align-items:flex-start;
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:20px 22px; margin-bottom:14px; box-shadow:var(--shadow);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .pub:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg); border-color:#d7e1f5}
+  .thumb{
+    flex:0 0 170px; width:170px; height:110px; border-radius:11px; object-fit:contain;
+    object-position:center; background:#f4f6fb; border:1px solid var(--line);
+    padding:6px; box-shadow:0 3px 10px rgba(28,40,80,.10);
+  }
+  .ptitle{font-weight:600; font-size:16.5px; color:var(--ink); line-height:1.4; margin-bottom:5px}
+  .authors{color:var(--muted); font-size:14px; margin-bottom:10px}
+  .authors .me{color:var(--accent-ink); font-weight:700}
+  .venue{display:inline-flex; align-items:center; gap:8px; vertical-align:middle}
+  .badge{
+    font-weight:700; font-size:12px; color:#fff; letter-spacing:.03em;
+    background:linear-gradient(135deg,var(--grad1),var(--grad2));
+    border-radius:7px; padding:4px 10px; box-shadow:0 3px 9px rgba(63,92,220,.26);
+  }
+  .badge.arxiv{background:linear-gradient(135deg,#8a93a8,#6b7488); box-shadow:0 3px 9px rgba(90,100,120,.22)}
+  .yr{color:var(--muted); font-size:13.5px; font-weight:600; font-variant-numeric:tabular-nums}
+  .plink{display:inline-flex; align-items:center; margin-left:14px; vertical-align:middle}
+  .plink a{
+    display:inline-flex; align-items:center; gap:5px; font-size:13px; font-weight:600;
+    color:var(--accent); background:var(--accent-soft); padding:4px 11px; border-radius:7px;
+  }
+  .plink a:hover{background:#e3ecff}
+
+  footer{margin-top:56px; text-align:center; color:var(--soft); font-size:13px}
+  footer .sep{color:var(--line); margin:0 8px}
+
+  @media(max-width:560px){
+    .hero{padding:24px; gap:22px}
+    .intro h1{font-size:31px}
+    .photo{width:128px; height:128px}
+    .pub{padding:18px; gap:14px; flex-wrap:wrap}
+    .thumb{flex-basis:100%; width:100%; height:150px; order:-1}
+  }
+</style>
+</head>
+<body>
+<div class="band"></div>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="photo-ring"><img class="photo" src="photo.png" alt="Xin Kang"></div>
+    <div class="intro">
+      <h1>Xin Kang <span class="zh">康鑫</span></h1>
+      <div class="role">China Solution Architect · NVIDIA Beijing</div>
+      <div class="role sub">Autonomous-Driving 3D Reconstruction · Feed-forward Reconstruction · VLA Models</div>
+      <a class="contact" href="mailto:joeyk@nvidia.com">✉ joeyk@nvidia.com</a>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="h2"><span class="dot"></span>About</div>
+    <div class="about">
+      <p>
+        I joined <b>NVIDIA Beijing</b> in July 2025, where I am currently a
+        <b>China Solution Architect</b>. My research focuses on 3D reconstruction
+        algorithms for autonomous driving, feed-forward reconstruction, and
+        vision-language-action (VLA) models. I received my Ph.D. (2020&ndash;2025)
+        and B.Eng. (2016&ndash;2020) from the University of Science and Technology
+        of China (USTC), advised by Prof. <b>Xuejin Chen</b> (陈雪锦).
+      </p>
+      <div class="interests">
+        <span class="chip">Autonomous-Driving 3D Reconstruction</span>
+        <span class="chip">Feed-forward Reconstruction</span>
+        <span class="chip">VLA Models</span>
+        <span class="chip">Gaussian Splatting</span>
+        <span class="chip">LiDAR Simulation</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section>
+    <div class="h2"><span class="dot"></span>Publications</div>
+
+    <div class="pub">
+      <img class="thumb" src="thumb_lidarevs.png" alt="LiDAR-EVS teaser">
+      <div class="info">
+        <div class="ptitle">LiDAR-EVS: Enhance Extrapolated View Synthesis for 3D Gaussian Splatting with Pseudo-LiDAR Supervision</div>
+        <div class="authors">Yiming Huang, <span class="me">Xin Kang</span>, Sipeng Zhang, Hongliang Ren, Weihua Zhang, Junjie Lai</div>
+        <div class="venue"><span class="badge">ECCV</span><span class="yr">2026</span></div>
+        <div class="plink"><a href="https://lastbasket.github.io/LiDAR-EVS_page/" target="_blank">Project Page ↗</a></div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <img class="thumb" src="thumb_simuli.png" alt="SimULi teaser">
+      <div class="info">
+        <div class="ptitle">SimULi: Real-Time LiDAR and Camera Simulation with Unscented Transforms</div>
+        <div class="authors">Haithem Turki, Qi Wu, <span class="me">Xin Kang</span>, Janick Martinez Esturo, Shengyu Huang, Ruilong Li, Zan Gojcic, Riccardo de Lutio</div>
+        <div class="venue"><span class="badge">ICLR</span><span class="yr">2026</span></div>
+        <div class="plink"><a href="https://research.nvidia.com/labs/sil/projects/simuli/" target="_blank">Project Page ↗</a></div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <img class="thumb" src="thumb_resgs.png" alt="ResGS teaser">
+      <div class="info">
+        <div class="ptitle">ResGS: Residual Densification of 3D Gaussian for Efficient Detail Recovery</div>
+        <div class="authors">Yanzhe Lyu, Kai Cheng, <span class="me">Xin Kang</span>, Xuejin Chen</div>
+        <div class="venue"><span class="badge">ICCV</span><span class="yr">2025</span></div>
+        <div class="plink"><a href="https://yanzhelyu.github.io/resgs.github.io/" target="_blank">Project Page ↗</a></div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <img class="thumb" src="thumb_ltm3d.png" alt="LTM3D teaser">
+      <div class="info">
+        <div class="ptitle">LTM3D: Bridging Token Spaces for Conditional 3D Generation with Auto-Regressive Diffusion Framework</div>
+        <div class="authors"><span class="me">Xin Kang</span>, Zihan Zheng, Lei Chu, Yue Gao, Jiahao Li, Hao Pan, Xuejin Chen, Yan Lu</div>
+        <div class="venue"><span class="badge arxiv">arXiv</span><span class="yr">2025</span></div>
+        <div class="plink"><a href="https://arxiv.org/abs/2505.24245" target="_blank">arXiv ↗</a></div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <img class="thumb" src="cvpr_teaser.png" alt="CVPR 2024 teaser">
+      <div class="info">
+        <div class="ptitle">Hierarchical Intra-modal Correlation Learning for Label-free 3D Semantic Segmentation</div>
+        <div class="authors"><span class="me">Xin Kang</span>, Lei Chu, Jiahao Li, Xuejin Chen, Yan Lu</div>
+        <div class="venue"><span class="badge">CVPR</span><span class="yr">2024</span></div>
+        <div class="plink"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Kang_Hierarchical_Intra-modal_Correlation_Learning_for_Label-free_3D_Semantic_Segmentation_CVPR_2024_paper.pdf" target="_blank">PDF ↗</a></div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <img class="thumb" src="thumb_tmm.png" alt="TMM 2023 teaser">
+      <div class="info">
+        <div class="ptitle">Region-Enhanced Feature Learning for Scene Semantic Segmentation</div>
+        <div class="authors"><span class="me">Xin Kang</span>, Chaoqun Wang, Xuejin Chen</div>
+        <div class="venue"><span class="badge">TMM</span><span class="yr">2023</span></div>
+        <div class="plink"><a href="https://arxiv.org/abs/2304.07486" target="_blank">arXiv ↗</a></div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 Xin Kang <span class="sep">·</span> NVIDIA Beijing <span class="sep">·</span> Built as a static homepage
+  </footer>
+
+</div>
+</body>
+</html>
