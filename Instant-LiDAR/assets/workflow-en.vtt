@@ -1,0 +1,36 @@
+WEBVTT
+
+00:00.550 --> 00:03.885
+This demo connects Cosmos and Instant LiDAR in one workflow.
+
+00:05.150 --> 00:09.368
+First, the Cosmos world model turns control signals into video and
+LiDAR.
+
+00:10.400 --> 00:14.616
+Instant LiDAR then reconstructs a 3D scene from these generated
+point clouds.
+
+00:17.250 --> 00:22.524
+The result is a reusable Gaussian asset, built in about fifty-one
+seconds without per-scene training.
+
+00:25.300 --> 00:28.269
+With the asset ready, we can render along different paths.
+
+00:30.200 --> 00:34.190
+Here, we compare the original path with a path shifted three meters
+to the left.
+
+00:39.200 --> 00:44.462
+Next, we keep both paths and switch between thirty-two, sixty-four,
+and one hundred twenty-eight beams.
+
+00:49.100 --> 00:53.073
+These views all come from the same asset, ready to reuse in
+simulation.
+
+00:56.650 --> 01:04.521
+This workflow shows how Instant LiDAR and the Cosmos world model
+turn control signals into reusable simulation assets through fast 3D
+reconstruction.
