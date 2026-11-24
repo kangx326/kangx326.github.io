@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://kangx326.github.io/Instant-LiDAR/">
   <link rel="canonical" href="https://kangx326.github.io/Instant-LiDAR/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=20261124-order3">
+  <link rel="stylesheet" href="styles.css?v=20261124-metrics4">
   <script src="app.js" defer></script>
   <title>Instant LiDAR | Feed-Forward Gaussian Reconstruction for LiDAR Simulation</title>
 </head>
@@ -40,12 +40,15 @@
         <a class="button" href="#results">Explore results <span aria-hidden="true">↓</span></a>
       </div>
       <p class="hero-summary"><strong>Turn LiDAR point clouds into reusable 3D scenes for autonomous-driving simulation.</strong> Reconstruct a scene once, then render new driving paths and sensor configurations—without optimizing each new scene separately.</p>
-      <div class="hero-metrics" aria-label="Reconstruction highlights">
-        <div><p class="metric-value">66<span> s</span></p><p class="metric-label">Waymo scene reconstruction</p></div>
-        <div><p class="metric-value">~70<span>×</span></p><p class="metric-label">faster than NuRec on Waymo</p></div>
-        <div><p class="metric-value">127<span> s</span></p><p class="metric-label">PAI reconstruction · ~46× faster</p></div>
+      <div class="hero-metrics" aria-labelledby="hero-metrics-title">
+        <p class="metric-context" id="hero-metrics-title">Waymo · Scene reconstruction</p>
+        <div class="metric-grid">
+          <div class="metric-baseline"><p class="metric-value">~80<span> min</span></p><p class="metric-label">NuRec</p></div>
+          <div><p class="metric-value">66<span> s</span></p><p class="metric-label">Instant LiDAR</p></div>
+          <div class="metric-speedup"><p class="metric-value">~70<span>×</span></p><p class="metric-label">faster than NuRec</p></div>
+        </div>
       </div>
-      <p class="note hero-note">Averages over six clips per dataset on NVIDIA H20. Time covers input scans to a renderable asset; offline training, rendering, and detection are excluded.</p>
+      <p class="note hero-note">Average over six Waymo clips on the same NVIDIA H20 GPU. Time covers input scans to a renderable asset; offline training, rendering, and detection are excluded.</p>
     </section>
 
     <section class="abstract-section" id="abstract" aria-labelledby="abstract-title">
