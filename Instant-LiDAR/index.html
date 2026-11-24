@@ -1,151 +1,106 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Instant LiDAR reconstructs reusable Gaussian scenes from LiDAR scans in minutes, without per-scene optimization. Explore the paper, full Cosmos workflow, and reconstruction results.">
-  <meta name="theme-color" content="#ffffff">
-  <meta property="og:title" content="Instant LiDAR — Feed-Forward Gaussian Reconstruction for LiDAR Simulation">
-  <meta property="og:description" content="From recorded or generated point clouds to reusable simulation assets. 66-second scene reconstruction on Waymo.">
-  <meta property="og:image" content="https://kangx326.github.io/Instant-LiDAR/assets/workflow-poster.jpg">
-  <meta property="og:url" content="https://kangx326.github.io/Instant-LiDAR/">
-  <link rel="canonical" href="https://kangx326.github.io/Instant-LiDAR/">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=20261124-metrics4">
-  <script src="app.js" defer></script>
-  <title>Instant LiDAR | Feed-Forward Gaussian Reconstruction for LiDAR Simulation</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Instant LiDAR — Feed-Forward Gaussian Reconstruction for LiDAR Simulation</title>
+<meta name="description" content="Turn LiDAR scans into reusable Gaussian scenes in 66 seconds on Waymo. Explore reconstruction, novel viewpoints, and downstream detection with Instant LiDAR.">
+<meta name="theme-color" content="#fbfcfa"><meta property="og:title" content="Instant LiDAR — From scans to reusable scenes"><meta property="og:description" content="66-second reconstruction on Waymo. Explore real point clouds, matched viewpoints, and the Cosmos workflow."><meta property="og:image" content="https://kangx326.github.io/Instant-LiDAR/assets/reconstruction-poster.jpg"><meta property="og:url" content="https://kangx326.github.io/Instant-LiDAR/">
+<link rel="canonical" href="https://kangx326.github.io/Instant-LiDAR/"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css?v=20261124-explore1"><script src="viewer.js?v=20261124-explore1" defer></script><script src="app.js?v=20261124-explore1" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="nav-wrap">
-      <a class="wordmark" href="#top"><span class="brand-dot" aria-hidden="true"></span>Instant LiDAR</a>
-      <nav aria-label="Main navigation">
-        <a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a href="#demo">Application</a>
-      </nav>
-    </div>
-  </header>
-  <main id="main">
-    <section class="hero container" id="top" aria-labelledby="project-title">
-      <p class="eyebrow">NVIDIA · Research project</p>
-      <h1 id="project-title">Instant <span>LiDAR</span></h1>
-      <p class="paper-title">Feed-Forward Gaussian Reconstruction for LiDAR Simulation</p>
-      <ul class="authors" aria-label="Authors">
-        <li>Xin Kang</li><li>Jiahui Huang</li><li>Jiawei Ren</li><li>Sipeng Zhang</li><li>Yu Chen</li><li>Weihua Zhang</li><li>Junjie Lai</li>
-      </ul>
-      <p class="affiliation">NVIDIA</p>
-      <div class="hero-actions">
-        <a class="button primary" href="assets/instant-lidar-paper.pdf" target="_blank" rel="noopener"><span aria-hidden="true">↗</span> Read the paper</a>
-        <a class="button" href="#demo"><span aria-hidden="true">▶</span> Watch the workflow</a>
-        <a class="button" href="#results">Explore results <span aria-hidden="true">↓</span></a>
-      </div>
-      <p class="hero-summary"><strong>Turn LiDAR point clouds into reusable 3D scenes for autonomous-driving simulation.</strong> Reconstruct a scene once, then render new driving paths and sensor configurations—without optimizing each new scene separately.</p>
-      <div class="hero-metrics" aria-labelledby="hero-metrics-title">
-        <p class="metric-context" id="hero-metrics-title">Waymo · Scene reconstruction</p>
-        <div class="metric-grid">
-          <div class="metric-baseline"><p class="metric-value">~80<span> min</span></p><p class="metric-label">NuRec</p></div>
-          <div><p class="metric-value">66<span> s</span></p><p class="metric-label">Instant LiDAR</p></div>
-          <div class="metric-speedup"><p class="metric-value">~70<span>×</span></p><p class="metric-label">faster than NuRec</p></div>
-        </div>
-      </div>
-      <p class="note hero-note">Average over six Waymo clips on the same NVIDIA H20 GPU. Time covers input scans to a renderable asset; offline training, rendering, and detection are excluded.</p>
-    </section>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav-shell"><div class="nav"><a class="wordmark" href="#top"><i aria-hidden="true"></i>Instant LiDAR</a><nav aria-label="Main navigation"><a class="nav-section" href="#method">Method</a><a class="nav-section" href="#results">Results</a><a class="nav-section" href="#application">Application</a><a class="nav-paper" href="assets/instant-lidar-paper.pdf" target="_blank" rel="noopener">Paper ↗</a><a class="nav-try" href="#explore">Explore in 3D <span aria-hidden="true">↗</span></a></nav></div></header>
+<main id="main">
+<section class="hero wrap" id="top">
+<p class="eyebrow">Instant LiDAR <span>· NVIDIA</span></p>
+<h1>LiDAR scenes.<br>
+<span>Ready in 66 seconds.</span></h1>
+<p class="hero-description">Turn a driving log into a reusable Gaussian scene.<br>
+Render new viewpoints, without optimizing each scene separately.</p>
+<div class="hero-visual" id="hero-visual">
+<canvas id="hero-cloud" aria-label="Rotating 3D view of an Instant LiDAR rendered scan. A static preview is shown if WebGL is unavailable."></canvas>
+<img class="hero-fallback" src="assets/explorer/hero-fallback.jpg" alt="A bird’s-eye view of the reconstructed Waymo street scene">
+<div class="hero-visual-label"><span class="live-dot"></span>Instant LiDAR rendered scan <span class="muted">/ Waymo</span></div>
+<button type="button" class="orbit-button" id="orbit-toggle" aria-pressed="false" aria-label="Pause scene rotation">Ⅱ</button>
+<a class="visual-link" href="#explore">Compare the same scene <span>↗</span></a>
+</div>
+<div class="hero-proof"><div><strong>66 s on one H20 GPU</strong><span>Waymo average · ~70× faster reconstruction than NuRec</span></div><a class="button primary" href="assets/instant-lidar-paper.pdf" target="_blank" rel="noopener">Read the paper ↗</a></div>
+<p class="paper-title">Feed-Forward Gaussian Reconstruction for LiDAR Simulation</p>
+<ul class="authors" aria-label="Authors"><li>Xin Kang</li><li>Jiahui Huang</li><li>Jiawei Ren</li><li>Sipeng Zhang</li><li>Yu Chen</li><li>Weihua Zhang</li><li>Junjie Lai</li></ul>
+</section>
 
-    <section class="abstract-section" id="abstract" aria-labelledby="abstract-title">
-      <div class="reading-column"><p class="eyebrow">Overview</p><h2 id="abstract-title">Abstract</h2>
-        <p>LiDAR reconstruction supports closed-loop autonomous driving simulation, but hours of per-scene optimization make large asset libraries costly to build and maintain. We present Instant LiDAR, a feed-forward pipeline that reconstructs multiple LiDAR scans as reusable Gaussian assets in minutes without per-scene optimization.</p>
-        <p>LiDAR measurements provide strong geometric priors, but directly initializing Gaussians from them yields poor reconstruction due to nonuniform sampling and a limited field of view. Sparse returns leave surface gaps, while combining scans expands coverage but introduces redundant primitives. To address these challenges, Instant LiDAR combines measurement-anchored Gaussian prediction, sampling-aware Gaussian scales, and multi-frame consolidation. The predictor refines attributes anchored to recorded returns, while the scales adapt spatial support to LiDAR sampling. Multi-frame consolidation merges overlapping predictions into a compact asset spanning the driving log.</p>
-        <p>Compared with NuRec, Instant LiDAR reconstructs scenes approximately <strong>46× faster on Physical AI (PAI)</strong> and <strong>70× faster on Waymo</strong>. It also achieves comparable downstream 3D detection accuracy on Waymo.</p>
-      </div>
-    </section>
+<section class="band" id="abstract"><div class="wrap overview section">
+<div><p class="eyebrow">01 / Overview</p><h2>Reconstruct once.<br>
+Render again.</h2></div>
+<div class="overview-copy"><p>LiDAR simulation needs a scene that can be queried from different positions and sensor settings. Building that scene usually takes lengthy per-scene optimization.</p><p><strong>Instant LiDAR predicts Gaussian assets directly from LiDAR scans.</strong> It combines predictions across the driving log into a reusable scene, reducing reconstruction from over an hour to about a minute on Waymo.</p><details class="abstract-details"><summary>Read the abstract <span>＋</span></summary><p>LiDAR measurements provide strong geometric priors, but directly initializing Gaussians from them yields poor reconstruction due to nonuniform sampling and a limited field of view. Sparse returns leave surface gaps, while combining scans expands coverage but introduces redundant primitives. Instant LiDAR combines measurement-anchored Gaussian prediction, sampling-aware Gaussian scales, and multi-frame consolidation. The predictor refines attributes anchored to recorded returns, the scales adapt spatial support to LiDAR sampling, and consolidation merges overlapping predictions into a compact asset spanning the driving log. Compared with NuRec, Instant LiDAR reconstructs scenes approximately 46× faster on Physical AI and 70× faster on Waymo, while retaining useful downstream detection quality.</p></details></div>
+</div></section>
 
-    <section class="method-section" id="method" aria-labelledby="method-title"><div class="container section">
-      <div class="section-heading"><p class="eyebrow">Method</p><h2 id="method-title">Predict locally. Consolidate once. Render repeatedly.</h2><p>A trained model predicts Gaussian attributes from LiDAR measurements, then combines the predictions into a scene spanning the driving log.</p></div>
-      <figure class="method-figure"><a href="assets/method-overview.png" target="_blank" rel="noopener" aria-label="Open the method overview at full resolution"><img src="assets/method-overview.png" loading="lazy" alt="Range and intensity maps enter an Instant LiDAR Transformer and DPT predictor. Per-frame Gaussians are consolidated into a scene for LiDAR rendering from multiple poses and timestamps."></a><figcaption>Instant LiDAR pipeline. Click the diagram to enlarge.</figcaption></figure>
-      <div class="method-grid">
-        <article><span class="step-index">01</span><h3>Measurement-anchored prediction</h3><p>Use recorded LiDAR returns as geometric anchors and predict Gaussian attributes around those observations.</p></article>
-        <article><span class="step-index">02</span><h3>Sampling-aware scales</h3><p>Adapt Gaussian support to LiDAR sampling, helping fill gaps without treating near and distant returns identically.</p></article>
-        <article><span class="step-index">03</span><h3>Multi-frame consolidation</h3><p>Register and merge overlapping predictions into a compact asset that supports repeated rendering.</p></article>
-      </div>
-    </div></section>
+<section class="wrap section" id="method">
+<div class="section-intro"><p class="eyebrow">02 / Method</p><h2>From measurements<br>
+to a renderable asset.</h2><p>A feed-forward predictor, followed by multi-frame consolidation.<br>
+No optimization loop for each new scene.</p></div>
+<div class="method-flow" aria-label="Instant LiDAR pipeline"><article><span class="step">01</span><h3>Anchor to measurements</h3><p>Predict Gaussian attributes around observed LiDAR returns.</p></article><span class="flow-arrow" aria-hidden="true">→</span><article><span class="step">02</span><h3>Adapt to sampling</h3><p>Adjust Gaussian support to the spacing of LiDAR measurements.</p></article><span class="flow-arrow" aria-hidden="true">→</span><article><span class="step">03</span><h3>Consolidate the scene</h3><p>Merge overlapping predictions across frames into one reusable asset.</p></article></div>
+<figure class="method-diagram"><a href="assets/method-overview.png" target="_blank" rel="noopener"><img src="assets/method-overview.png" width="2200" height="775" loading="lazy" alt="Range and intensity maps enter a Transformer and DPT predictor. Per-frame Gaussians are consolidated for rendering at different poses and timestamps."></a><figcaption>The model predicts locally; consolidation builds the scene. <a href="assets/method-overview.png" target="_blank" rel="noopener">Open full diagram ↗</a></figcaption></figure>
+</section>
 
-    <section class="container section" id="results" aria-labelledby="results-title">
-      <div class="section-heading"><p class="eyebrow">Experimental results</p><h2 id="results-title">Build scenes faster. Test beyond the recorded path.</h2><p>Reconstruction time and downstream detection measure different parts of the value of a reusable scene.</p></div>
-      <div class="results-block reconstruction-block">
-        <div class="block-heading"><div><h3>See the reconstruction quality.</h3><p>The same recorded trajectory, shown as NuRec, Instant LiDAR, and ground truth.</p></div></div>
-        <figure class="video-figure comparison-video">
-          <video controls muted loop playsinline preload="metadata" poster="assets/reconstruction-poster.jpg" width="1800" height="712" aria-label="Original-view LiDAR comparison: NuRec, Instant LiDAR, and ground truth">
-            <source src="assets/reconstruction.mp4" type="video/mp4">
-            <a href="assets/reconstruction.mp4">Download the reconstruction comparison.</a>
-          </video>
-          <figcaption>Original-view reconstruction · clip 8f619ae7 · all frames preserved</figcaption>
-        </figure>
-      </div>
+<section class="band" id="results"><div class="wrap section">
+<div class="section-intro"><p class="eyebrow">03 / Reconstruction speed</p><h2>A scene in minutes.<br>
+Without per-scene training.</h2><p>Time from input scans to a renderable Gaussian asset.<br>
+Same NVIDIA H20 GPU, six clips per dataset.</p></div>
+<div class="benchmark-panel"><div class="panel-toolbar"><h3>Scene reconstruction time</h3><div class="segmented" role="group" aria-label="Reconstruction dataset"><button type="button" data-dataset="Waymo" class="selected" aria-pressed="true">Waymo</button><button type="button" data-dataset="PAI" aria-pressed="false">Physical AI</button></div></div>
+<div class="benchmark-grid"><div class="benchmark-callout" aria-live="polite"><span id="time-dataset">Waymo average</span><p><strong id="time-seconds">66</strong><span>seconds</span></p><div class="ratio"><strong id="time-ratio">~70×</strong> faster than NuRec</div></div><div><div id="timing-chart" class="timing-chart" aria-live="polite"></div><p class="chart-note">Linear scale · lower is better</p></div></div>
+<p class="note">Times exclude offline training, rendering, and detection. The speedup comes with a gap in overall geometric fidelity to NuRec.</p>
+<details class="data-details"><summary>Compare geometry and reconstruction time <span>＋</span></summary><div class="table-scroll"><table><caption id="quality-caption">Waymo reconstruction results</caption><thead><tr><th scope="col">Method</th><th scope="col">Time (s) ↓</th><th scope="col">CD (m) ↓</th><th scope="col">F@5 ↑</th></tr></thead><tbody id="quality-table"></tbody></table></div><p class="note">CD: Chamfer distance. F@5: F-score at 5 cm. All values are reported in the paper.</p></details>
+</div>
+</div></section>
 
-      <div class="results-block">
-        <div class="block-heading"><div><h3>Scene reconstruction time</h3><p>Input LiDAR scans → renderable Gaussian asset</p></div>
-          <div class="segmented" role="group" aria-label="Reconstruction dataset"><button type="button" class="selected" aria-pressed="true" data-dataset="Waymo">Waymo</button><button type="button" aria-pressed="false" data-dataset="PAI">Physical AI</button></div>
-        </div>
-        <div id="timing-chart" class="timing-chart" aria-live="polite"></div>
-        <p class="note">Same NVIDIA H20 GPU; six clips per dataset. Linear bar lengths show elapsed time. NuRec, LiDAR-GS, SplatAD, and LiDAR-EVS use per-scene optimization.</p>
-        <details class="data-details"><summary>View reconstruction quality alongside time</summary><div class="table-scroll"><table><caption id="quality-caption">Waymo reconstruction results</caption><thead><tr><th scope="col">Method</th><th scope="col">Time (s) ↓</th><th scope="col">CD (m) ↓</th><th scope="col">F@5 ↑</th></tr></thead><tbody id="quality-table"></tbody></table></div><p class="note">CD is Chamfer distance; F@5 is the F-score at 5 cm. Faster reconstruction does not imply better scene-wide geometry: the strongest per-scene methods retain an advantage in these metrics.</p></details>
-      </div>
+<section class="wrap section" id="explore">
+<div class="section-intro"><p class="eyebrow">04 / Interactive comparison</p><h2>Same scene.<br>
+Your point of view.</h2><p>Rotate both scans together. Move off the recorded path.<br>
+Look at the road, vehicle shapes, and detector outputs.</p></div>
+<div class="explorer" id="explorer">
+<div class="explorer-toolbar"><div class="segmented" role="group" aria-label="Rendered sensor pose"><button type="button" data-pose="recorded" class="selected" aria-pressed="true">Recorded pose</button><button type="button" data-pose="shifted" aria-pressed="false">Sensor 3 m left</button></div><label class="check"><input type="checkbox" id="show-boxes"> Detection overlay</label></div>
+<div class="cloud-pair"><div class="cloud-pane"><div class="pane-heading"><label for="baseline">Compare with</label><select id="baseline"><option value="nurec">NuRec</option><option value="evs">LiDAR-EVS</option></select></div><canvas id="baseline-cloud" tabindex="0" aria-label="Baseline scan. Drag or use arrow keys to rotate, scroll or use plus and minus to zoom. Both views move together."></canvas><img class="cloud-fallback" src="assets/explorer/nurec-fallback.jpg" alt="Static NuRec overview"><span class="cloud-count" id="baseline-count"></span></div><div class="cloud-pane ours-pane"><div class="pane-heading"><span class="ours-label"><i></i>Instant LiDAR</span><span class="pane-tag">Feed-forward</span></div><canvas id="instant-cloud" tabindex="0" aria-label="Instant LiDAR scan. Drag or use arrow keys to rotate, scroll or use plus and minus to zoom. Both views move together."></canvas><img class="cloud-fallback" src="assets/explorer/instant-fallback.jpg" alt="Static Instant LiDAR overview"><span class="cloud-count" id="instant-count"></span></div></div>
+<div class="explorer-footer"><div class="view-presets" role="group" aria-label="Camera preset"><button type="button" data-view="overview" class="selected" aria-pressed="true">Overview</button><button type="button" data-view="corner" aria-pressed="false">Street corner</button><button type="button" data-view="top" aria-pressed="false">Top view</button></div><span class="controls-hint">Drag to rotate · scroll to zoom</span><button class="text-button" type="button" id="reset-camera">Reset ↺</button></div>
+<div class="viewer-status" id="viewer-status" role="status">Loading the matched scans…</div>
+</div>
+<div class="viewer-caption"><p id="viewer-caption">Waymo w100pap1 · frame 22 · recorded pose · same 90 × 90 m crop</p><div id="intensity-legend" class="intensity-legend"><span>Intensity</span><i></i><span>0 → 0.3</span></div><div id="box-legend" class="box-legend" hidden><span class="tp">Matched detection</span><span class="fp">Unmatched detection</span><span class="fn">Missed annotation</span></div></div>
+<p class="note" id="viewer-note">Interactive views of saved rendered scans, not live model inference. Both methods share the camera, crop, and intensity scale. No points are subsampled within this crop.</p>
+<details class="data-details"><summary>How to interpret the detection overlay <span>＋</span></summary><p>The same frozen CenterPoint detector is used across methods. Boxes use a score threshold of 0.3 and saved, same-class greedy matching at 3D IoU 0.7 / 0.5 / 0.5 for vehicles / pedestrians / cyclists. These per-frame matches are a qualitative aid, not AP. Aggregate evaluation is shown below. There is no measured ground-truth scan at the shifted sensor pose.</p></details>
+<div class="sequence-section"><div><h3>Watch the reconstructed driving sequence.</h3><p class="muted">NuRec, Instant LiDAR, and ground truth along the same recorded trajectory.</p></div><figure class="video-figure"><video id="comparison-video" controls muted loop playsinline preload="none" poster="assets/reconstruction-poster.jpg" width="1800" height="712" aria-label="NuRec, Instant LiDAR, and ground-truth reconstruction comparison"><source src="assets/reconstruction.mp4" type="video/mp4"><a href="assets/reconstruction.mp4">Download comparison</a></video><figcaption>Original-view comparison · clip 8f619ae7 · complete sequence</figcaption></figure></div>
+</section>
 
-      <div class="results-block detection-block">
-        <div class="block-heading"><div><h3>Detection on reconstructed scans</h3><p>One frozen CenterPoint detector. Different query viewpoints.</p></div></div>
-        <div class="segmented query-tabs" role="group" aria-label="Detection query setting"><button type="button" class="selected" aria-pressed="true" data-query="shifted">3 m left shift · 314 queries</button><button type="button" aria-pressed="false" data-query="heldout">Held-out · 24 queries</button><button type="button" aria-pressed="false" data-query="conditioning">Conditioning · 290 queries</button></div>
-        <div class="table-scroll"><table><caption id="detection-caption">Waymo · 3 m left shift · LEVEL 1 AP (%)</caption><thead><tr><th scope="col">Reconstruction</th><th scope="col">Vehicle AP ↑</th><th scope="col">Pedestrian AP ↑</th></tr></thead><tbody id="detection-table"></tbody></table></div>
-        <p id="query-note" class="note" aria-live="polite"></p>
-        <figure class="evidence-figure"><a href="assets/shifted-detection.png" target="_blank" rel="noopener" aria-label="Open the shifted-view detection comparison at full resolution"><img src="assets/shifted-detection.png" width="1344" height="1308" loading="lazy" alt="At a 3 m left sensor offset, Instant LiDAR improves vehicle AP by 7.7 points and pedestrian AP by 5.4 points over LiDAR-EVS. Matched street-corner crops show the corresponding detections."></a><figcaption>A closer look at the 3 m left shift. The same street-corner crop, scale, and detector; Waymo w100pap1, frame 22. Gains use the paper’s reported precision. Click to enlarge.</figcaption></figure>
-      </div>
+<section class="band" id="detection"><div class="wrap section">
+<div class="section-intro"><p class="eyebrow">05 / Downstream detection</p><h2>What does the<br>
+detector see?</h2><p>Evaluate the rendered scans with one frozen CenterPoint model.<br>
+Keep the dataset, detector, and query setting matched.</p></div>
+<div class="detection-panel"><div class="query-tabs segmented" role="group" aria-label="Detection query setting"><button type="button" data-query="shifted" class="selected" aria-pressed="true">3 m left shift</button><button type="button" data-query="heldout" aria-pressed="false">Held-out frames</button><button type="button" data-query="conditioning" aria-pressed="false">Conditioning frames</button></div><p class="query-context" id="query-context"></p><div id="detection-charts" class="detection-charts" aria-live="polite"></div><p class="detection-takeaway" id="detection-takeaway"></p><p class="note" id="query-note"></p>
+<details class="data-details"><summary>Show the numerical results <span>＋</span></summary><div class="table-scroll"><table><caption id="detection-caption"></caption><thead><tr><th scope="col">Reconstruction</th><th scope="col">Vehicle AP ↑</th><th scope="col">Pedestrian AP ↑</th></tr></thead><tbody id="detection-table"></tbody></table></div></details></div>
+<div class="limitations"><span class="eyebrow">The tradeoff</span><p>There is still a gap to NuRec on geometric reconstruction metrics. The gain is much faster reconstruction, with stronger detection on held-out and shifted views. On conditioning views, NuRec retains higher vehicle AP.</p><p class="note">The method relies on accurate sensor poses and dynamic-object annotations. Joint camera–LiDAR reconstruction is outside the current model’s scope.</p></div>
+</div></section>
 
-      <details class="data-details full-figure"><summary>Explore the paper’s qualitative reconstruction comparison</summary><figure><a href="assets/reconstruction-results.png" target="_blank" rel="noopener"><img src="assets/reconstruction-results.png" loading="lazy" alt="Paper comparison of LiDAR reconstruction on PAI, Waymo, and a Waymo viewpoint shifted 3 m left."></a><figcaption>Recorded and extrapolated poses. All panels use the same 90 × 90 m crop; there is no measured ground-truth scan at the shifted pose.</figcaption></figure></details>
-      <div class="scope-note"><h3>Scope and limitations</h3><p>Instant LiDAR trades some scene-wide geometric fidelity for reconstruction speed while preserving useful downstream detection quality. It relies on accurate sensor poses and dynamic-object annotations. Joint camera–LiDAR reconstruction is not part of the current model; the Cosmos workflow is a separate demonstration of generation followed by LiDAR reconstruction.</p></div>
-    </section>
+<section class="wrap section application" id="application">
+<span id="demo" aria-hidden="true"></span>
+<div class="section-intro"><p class="eyebrow">06 / Application</p><h2>Cosmos ×<br>
+Instant LiDAR.</h2><p>Generate the data. Reconstruct the asset. Reuse the scene.<br>
+A complete pipeline from control signals to LiDAR simulation.</p></div>
+<ol class="application-flow"><li><span>01</span><strong>Input signals</strong><small>Scene controls</small></li><li><span>02</span><strong>Generated data</strong><small>Cosmos video + LiDAR</small></li><li><span>03</span><strong>Reconstructed asset</strong><small>Instant LiDAR scene</small></li><li><span>04</span><strong>Reusable rendering</strong><small>New paths + sensors</small></li></ol>
+<figure class="video-figure workflow"><video id="workflow-video" controls playsinline preload="none" poster="assets/workflow-poster.jpg" width="1920" height="1080" aria-label="Complete 66-second Cosmos and Instant LiDAR workflow with narration"><source src="assets/workflow.mp4" type="video/mp4"><track kind="captions" src="assets/workflow-en.vtt" srclang="en" label="English"><a href="assets/workflow.mp4">Download the full workflow</a></video><figcaption><span>Complete workflow · 66 seconds · 1080p · narration</span><a href="assets/workflow.mp4" download>Download video ↓</a></figcaption></figure>
+<div class="chapter-buttons" role="group" aria-label="Video chapters"><button type="button" data-time="5"><span>0:05</span>Generate data</button><button type="button" data-time="17"><span>0:17</span>Reconstruct</button><button type="button" data-time="25"><span>0:25</span>Change path</button><button type="button" data-time="39"><span>0:39</span>Change sensor</button><button type="button" data-time="48"><span>0:48</span>Reuse scene</button></div>
+<p class="note">A separate application demo: generation is followed by LiDAR reconstruction. This scene takes about 51 seconds to reconstruct, including model loading, inference, fusion, and saving; Cosmos generation is excluded. This example and the video’s duration are separate from the paper’s 66-second Waymo average.</p>
+</section>
 
-    <section class="reading-column section paper-section" id="paper" aria-labelledby="paper-title">
-      <p class="eyebrow">Read more</p><h2 id="paper-title">Paper and citation</h2><p>See the manuscript for the full evaluation, ablations, reconstruction details, and supplementary material.</p>
-      <div class="paper-actions"><a class="button primary" href="assets/instant-lidar-paper.pdf" target="_blank" rel="noopener">Open the full paper ↗</a><a class="button" href="mailto:joeyk@nvidia.com?subject=Instant%20LiDAR">Contact the team</a></div>
-      <div class="citation-heading"><h3>BibTeX</h3><button id="copy-citation" class="text-button" type="button">Copy citation</button></div>
-      <pre id="citation"><code>@misc{kang2026instantlidar,
-  title  = {Instant LiDAR: Feed-Forward Gaussian
-            Reconstruction for LiDAR Simulation},
-  author = {Kang, Xin and Huang, Jiahui and Ren, Jiawei
-            and Zhang, Sipeng and Chen, Yu
-            and Zhang, Weihua and Lai, Junjie},
-  year   = {2026},
-  note   = {Project manuscript},
-  url    = {https://kangx326.github.io/Instant-LiDAR/}
-}</code></pre>
-      <p id="copy-status" class="note" role="status"></p>
-    </section>
-
-    <section class="container section demo-section" id="demo" aria-labelledby="demo-title">
-      <div class="section-heading"><p class="eyebrow">Application</p><h2 id="demo-title">Cosmos × Instant LiDAR</h2><p>From control signals to reusable simulation: a generation model creates the data, and Instant LiDAR reconstructs a scene you can render again and again.</p></div>
-      <ol class="pipeline" aria-label="Workflow stages">
-        <li><span class="step-index">01</span><strong>Input signals</strong><span>Scene controls</span></li>
-        <li><span class="step-index">02</span><strong>Generated data</strong><span>Cosmos video + LiDAR</span></li>
-        <li><span class="step-index">03</span><strong>Reconstructed asset</strong><span>Instant LiDAR 3D scene</span></li>
-        <li><span class="step-index">04</span><strong>Reusable rendering</strong><span>New paths + sensor settings</span></li>
-      </ol>
-      <figure class="video-figure">
-        <video id="workflow-video" controls playsinline preload="metadata" poster="assets/workflow-poster.jpg" width="1920" height="1080" aria-label="Complete 66-second Cosmos and Instant LiDAR workflow with narration">
-          <source src="assets/workflow.mp4" type="video/mp4">
-          <track kind="captions" src="assets/workflow-en.vtt" srclang="en" label="English">
-          Your browser does not support embedded video. <a href="assets/workflow.mp4">Download the full workflow.</a>
-        </video>
-        <figcaption><span>Full 66-second workflow · 1080p · narration</span><a href="assets/workflow.mp4" download>Download video ↓</a></figcaption>
-      </figure>
-      <div class="chapter-buttons" role="group" aria-label="Jump to a video chapter">
-        <button type="button" data-time="5">Generate data <span>0:05</span></button>
-        <button type="button" data-time="17">Reconstruct the asset <span>0:17</span></button>
-        <button type="button" data-time="25">Change the path <span>0:25</span></button>
-        <button type="button" data-time="39">Change the sensor <span>0:39</span></button>
-        <button type="button" data-time="48">Reuse the scene <span>0:48</span></button>
-      </div>
-      <p class="note">This demo shows one generated scene reconstructed in about 51 seconds, including model loading, inference, fusion, and saving. Cosmos generation is excluded. This example is separate from the paper’s 66-second Waymo average.</p>
-    </section>
-  </main>
-  <footer class="site-footer"><div class="container"><span>Instant LiDAR · NVIDIA</span><a href="https://lastbasket.github.io/LiDAR-EVS_page/">Project-page structure inspired by LiDAR-EVS ↗</a></div></footer>
+<section class="paper-section band" id="paper"><div class="wrap section"><div class="paper-layout"><div><p class="eyebrow">The paper</p><h2>Instant LiDAR</h2><p>Feed-Forward Gaussian Reconstruction<br>
+for LiDAR Simulation</p><div class="paper-actions"><a class="button primary" href="assets/instant-lidar-paper.pdf" target="_blank" rel="noopener">Read the paper ↗</a><a class="button secondary" href="mailto:joeyk@nvidia.com?subject=Instant%20LiDAR">Contact the team</a></div></div><div class="paper-meta"><p>Xin Kang · Jiahui Huang · Jiawei Ren · Sipeng Zhang<br>
+Yu Chen · Weihua Zhang · Junjie Lai</p><p class="muted">NVIDIA · Project manuscript · 2026</p><details class="citation-details"><summary>Citation <span>＋</span></summary><pre id="citation">@misc{kang2026instantlidar,
+  title = {Instant LiDAR: Feed-Forward Gaussian Reconstruction for LiDAR Simulation},
+  author = {Kang, Xin and Huang, Jiahui and Ren, Jiawei and Zhang, Sipeng and Chen, Yu and Zhang, Weihua and Lai, Junjie},
+  year = {2026},
+  note = {Project manuscript},
+  url = {https://kangx326.github.io/Instant-LiDAR/}
+}</pre><button class="text-button" id="copy-citation" type="button">Copy BibTeX</button><span id="copy-status" role="status"></span></details></div></div></div></section>
+</main>
+<footer class="wrap footer"><span>Instant LiDAR · NVIDIA</span><span>Presentation inspired by <a href="https://supermimic.github.io/" target="_blank" rel="noopener">SuperMimic ↗</a></span><a href="#top">Back to top ↑</a></footer>
+<noscript><p class="noscript">Enable JavaScript for the interactive comparisons and charts. Videos, figures, and the full <a href="assets/instant-lidar-paper.pdf">paper</a> are available without it.</p></noscript>
 </body>
 </html>
